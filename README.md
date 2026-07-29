@@ -27,6 +27,6 @@ To use this program, all you need to do is run it (must be in Administrator Mode
 > The program will watch for specific points in the game to see if the music program is active. Once it detects the program is active and all conditions are met, it will start reading the notes as they drop. Once they past a specific point, they will detect the note and fire a Task that we call Fire and Forget. This task times the hits for when they hit the line. The reason for this is because animations on the line itself can interfere with the program. The program reads the colors on the screen so it isn't intrusive at all. Settings will help adjusting for individual cases, the defaults are what worked for me when I ran my tests.
 
 ## Future Plans
-> The blue buttons are not 100%. They work well enough to keep in the 90%+ range but it could use some fine tuning. I probably won't play with it for a while since being in the 90% is pretty decent already.
+> The blue buttons are not 100% hits. They work well enough to keep in the 90%+ range but it could use some fine tuning. I probably won't play with it for a while since being in the 90% is pretty decent already.
 > I also considered adding more features to this like auto looting (pressing F when the option appeared on the screen automatically).
 > If you have a suggestion, please feel free to suggest it through Github.

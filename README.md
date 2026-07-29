@@ -7,7 +7,11 @@
 
 I wrote this program in 3 days because I was frustrated with another program that was written in Chinese that I couldn't read and get working, so I made my own version that worked ...
 
-To use this program, all you need to do is run it (must be in Administrator Mode) and it will run in your System Tray (bottom right of the screen). You also need the game in 1920x1080 resolution. Here is how it works ...
+> You also need to set the game to 1920 x 1080 resolution. (If enough people really need it, I could add code for other resolutions later).
+> Run in Administrator Mode. There are two ways to do it, I suggest number 2.
+>> 1. Right click the EXE and click on **Run in Administrator Mode** (This is a one time action, you have to do it each time you want to run the program).<br>
+>> 2. Right click the EXE and click on **Properties** and the click on the **Compatibility** tab. You want to check the box that says **Run in Administrator Mode**.<br>
+
 
 ### System Tray Icon
 > Right clicking allows you to access the menu to Activate / Deactivate it or close it out completely.

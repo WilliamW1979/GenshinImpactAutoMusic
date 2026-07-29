@@ -1,87 +1,32 @@
-# GenshinImpactAutoMusic
+[Ko-Fi](https://ko-fi.com/williamw1979) - Please help support my work.<br>
+[Github](https://github.com/WilliamW1979) - My current projects<br>
+[Github Sponsor](https://github.com/sponsors/WilliamW1979) - If you enjoy my programs and want to help, please sponsor me.<br>
+# Genshin Impact Auto Music
 
-## What changed in the cleanup
-`AutoMusicEngine.cs` replaces `Program.cs`. Line count went from 292 to ~215 despite
-adding a window-monitoring loop the old one-shot `Main` didn't need. Changes:
-- `IsGoldButton` / `IsBlueButton` merged into one `IsButton(target, test, tolerance)`.
-- `ReleaseAfterDelay` removed — it was never called anywhere in the original file.
-- `Timestamp()` and the `Console.WriteLine` diagnostics removed since this is now a
-  tray app with no console.
-- `InitializeFaceMask` / `InitializeBarMask` merged into one `BuildMasks()` that
-  builds both arrays in a single pass.
-- Everything moved from `static` fields on `Program` to instance members on
-  `AutoMusicEngine`, since the app now needs to start/stop/reconfigure it at runtime
-  instead of running once and exiting.
-- `Program.Main`'s one-shot window lookup became `MonitorWindowLoopAsync`, which
-  keeps retrying every second so the app can sit in the tray before Genshin is even
-  open, rather than requiring the game to already be running.
+## How to Use
 
-Detection logic (gate timing, blob scheduling, hold/release for blue notes) is
-untouched — same tolerances, same offsets, same behavior.
+I wrote this program in 3 days because I was frustrated with another program that was written in Chinese that I couldn't read and get working, so I made my own version that worked ...
 
-## New pieces for the Windows app
-| File | Purpose |
-|---|---|
-| `App.xaml` / `App.xaml.cs` | Shows the splash screen for 5s, then builds the tray icon. No window opens automatically. |
-| `SettingsWindow.xaml(.cs)` | The window that opens when you click the tray icon. Status readout + editable tolerances/offsets + links. |
-| `AppSettings.cs` | Thin wrapper around your `SettingsFile` for persisting the four tunables and the Auto Play toggle. |
-| `AdminHelper.cs` | `WindowsPrincipal` elevation check for the Admin Mode indicator. |
-| `GitHubUpdateChecker.cs` | Hits `GitHub`'s releases API and compares `tag_name` against the running assembly version. |
+To use this program, all you need to do is run it (must be in Administrator Mode) and it will run in your System Tray (bottom right of the screen). Here is how it works ...
 
-### One thing worth flagging
-Rule 13 says never use JSON, but GitHub's releases API only returns JSON — that's
-their contract, not something under our control. Rather than pull in
-`System.Text.Json`, I did a plain string extraction of `tag_name` and `html_url`
-out of the raw response body. It works for GitHub's stable response shape, but it's
-not a real parser — if you'd rather just use `System.Text.Json` for this one
-external-API case, say the word and I'll swap it in.
+### System Tray Icon
+> Right clicking allows you to access the menu to Activate / Deactivate it or close it out completely.
+> Left clicking will open the settings window
 
-### The four status fields
-- **Genshin Game**: raw foreground-window check.
-- **Music Playing**: the existing pause-button detection, undebounced by the tray
-  toggle — this is the "is a song actually running" signal.
-- **Admin Mode**: elevation check; the window shows a red warning banner when false,
-  since `SendInput` silently no-ops against an elevated game otherwise.
-- **Auto Play Active**: the tray right-click toggle.
+### Settings Window
+> Genshin Game: tells you if the game is in focus
+> Music Playing: Detects is you are in performing mode
+> Admin Mode: Tells you if this program is running in Administrator Mode
+> Auto Play Active: Tells you if you have the Auto Playing active (Activate/Deactivate from System Tray menu)
 
-Key presses only fire when **both** Music Playing and Auto Play Active are true —
-that's the "another check" you described, just applied where the presses actually
-get scheduled rather than inside `GameActive()` itself, so Music Playing can still
-report the true detection state independent of the toggle.
+> Gold Tolerance / Blue Tolerance: These settings allow you to adjust the color matching tolerance. The system pulls the pixel colors in RGB and the tolerance allows you to be off on each color by this amount to make a match. The higher the number, the better it will hit buttons but the higher the risk of hitting other colors you don't want to to hit. Playing with these numbers, the defaults worked pretty well for me but I wanted people to have the option to adjust these numbers just in case their graphics were different.
+> Hit Offset: This adjust the detection zone for the buttons. A positive number moves it lower on the screen while a negative number moves it higher.
+> Timing Offset: This is the ms offset for pressing keys. If you find you are hitting a lot of Good instead of Perfects, adjusting this will help.
 
-## Resources you still need to supply
-- `Resources/GitHub.png` and `Resources/Sponsor.png` are generic placeholder
-  circles I generated — I didn't use GitHub's real logo since it's trademarked.
-  Drop in your own icons (or the official GitHub mark if you have a license to use
-  it) whenever you're ready.
-- `Resources/Kofi.png` and `Resources/Ward_Shield_Transparent_Background.png` are
-  the files you uploaded, copied in as-is.
-- `Resources/Ward_Shield_Transparent_Background.ico` was generated from your PNG
-  for the tray icon (multi-size: 16–256px).
+## How it Works
+> The program will watch for specific points in the game to see if the music program is active. Once it detects the program is active and all conditions are met, it will start reading the notes as they drop. Once they past a specific point, they will detect the note and fire a Task that we call Fire and Forget. This task times the hits for when they hit the line. The reason for this is because animations on the line itself can interfere with the program. The program reads the colors on the screen so it isn't intrusive at all. Settings will help adjusting for individual cases, the defaults are what worked for me when I ran my tests.
 
-## Wiring up as a solution
-This project references `..\WardShieldSplashWindow\WardShieldSplashWindow.csproj`
-and `..\SettingsFile\SettingsFile.csproj` by relative path. Put all three project
-folders as siblings:
-
-```
-/YourSolutionFolder
-  /GenshinImpactAutoMusic
-  /WardShieldSplashWindow
-  /SettingsFile
-```
-
-or swap the `ProjectReference` entries in the `.csproj` for whatever path your repo
-actually uses.
-
-## GitHub repo assumption
-`GitHubUpdateChecker` points at
-`https://api.github.com/repos/WilliamW1979/GenshinImpactAutoMusic/releases/latest`,
-matching the repo name you said you're going to create. Tag your releases like
-`v1.0.0` so the version comparison works.
-
-## Not verified by compiling
-I don't have a Windows/.NET SDK environment here to build a WPF project against, so
-this hasn't been compiled — I've been careful with the API surfaces (`SendInput`,
-`DXGI`, `NotifyIcon`, `DispatcherTimer`, etc.) but you should do a build pass before
-trusting it fully.
+## Future Plans
+> The blue buttons are not 100%. They work well enough to keep in the 90%+ range but it could use some fine tuning. I probably won't play with it for a while since being in the 90% is pretty decent already.
+> I also considered adding more features to this like auto looting (pressing F when the option appeared on the screen automatically).
+> If you have a suggestion, please feel free to suggest it through Github.

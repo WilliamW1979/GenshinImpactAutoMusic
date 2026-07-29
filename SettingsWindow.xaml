@@ -1,0 +1,65 @@
+<Window x:Class="GenshinImpactAutoMusic.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Genshin Impact Auto Music" Height="480" Width="420" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <StackPanel Margin="16">
+        <TextBlock Text="Status" FontWeight="Bold" FontSize="16" Margin="0,0,0,8"/>
+        <Grid Margin="0,0,0,4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Genshin Game:"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" x:Name="GenshinGameText"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Music Playing:"/>
+            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="MusicPlayingText"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Admin Mode:"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" x:Name="AdminModeText"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Auto Play Active:"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" x:Name="AutoPlayText"/>
+        </Grid>
+        <TextBlock x:Name="AdminWarning" Text="Admin Mode is off. Key presses will not reach the game until this app is run as Administrator." Foreground="Red" TextWrapping="Wrap" Margin="0,4,0,8"/>
+        <Separator Margin="0,8"/>
+        <TextBlock Text="Settings" FontWeight="Bold" FontSize="16" Margin="0,0,0,8"/>
+        <Grid Margin="0,0,0,4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Gold Tolerance:" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="0" Grid.Column="1" x:Name="GoldToleranceBox" Margin="0,2"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Blue Tolerance:" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="1" Grid.Column="1" x:Name="BlueToleranceBox" Margin="0,2"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Hit Offset:" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="2" Grid.Column="1" x:Name="HitOffsetBox" Margin="0,2"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Timing Offset (ms):" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="3" Grid.Column="1" x:Name="TimingOffsetBox" Margin="0,2"/>
+        </Grid>
+        <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+            <Button Content="Save" Width="80" Margin="0,0,8,0" Click="OnSave"/>
+            <Button Content="Reset to Defaults" Width="140" Click="OnReset"/>
+        </StackPanel>
+        <Separator Margin="0,12"/>
+        <Button Content="Check for Updates" HorizontalAlignment="Left" Click="OnCheckUpdate" Margin="0,0,0,12"/>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <Image Source="Resources/GitHub.png" Width="24" Height="24" Margin="0,0,4,0"/>
+            <TextBlock VerticalAlignment="Center" Margin="0,0,16,0"><Hyperlink NavigateUri="https://github.com/WilliamW1979" RequestNavigate="OnNavigate">GitHub</Hyperlink></TextBlock>
+            <Image Source="Resources/Kofi.png" Width="24" Height="24" Margin="0,0,4,0"/>
+            <TextBlock VerticalAlignment="Center" Margin="0,0,16,0"><Hyperlink NavigateUri="https://ko-fi.com/williamw1979" RequestNavigate="OnNavigate">Ko-Fi</Hyperlink></TextBlock>
+            <Image Source="Resources/Sponsor.png" Width="24" Height="24" Margin="0,0,4,0"/>
+            <TextBlock VerticalAlignment="Center"><Hyperlink NavigateUri="https://github.com/sponsors/WilliamW1979" RequestNavigate="OnNavigate">Sponsor</Hyperlink></TextBlock>
+        </StackPanel>
+    </StackPanel>
+</Window>

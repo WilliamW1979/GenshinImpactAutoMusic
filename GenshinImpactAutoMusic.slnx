@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="../../SettingsFile/SettingsFile/SettingsFile.csproj" />
+  <Project Path="../../Ward Shield Splash Window/WardShieldSplashWindow.csproj" />
+  <Project Path="GenshinImpactAutoMusic.csproj" />
+</Solution>

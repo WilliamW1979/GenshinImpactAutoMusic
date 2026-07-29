@@ -16,7 +16,7 @@ public sealed partial class App : Application
     {
         base.OnStartup(e);
         Directory.CreateDirectory(Path.GetDirectoryName(SettingsPath())!);
-        await AppSplashScreen.ShowAsync(InitializeAsync);
+        await AppSplashScreen.ShowAsync(InitializeAsync, size: SplashSize.ScaledBy(0.5));
         BuildTrayIcon();
     }
 

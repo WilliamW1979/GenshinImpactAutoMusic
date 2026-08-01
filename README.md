@@ -54,5 +54,6 @@ The program monitors specific screen regions to detect when the in-game music mi
 
 * Refine blue note detection algorithms to improve hit rates beyond the current 90%+ baseline.
 * Implement automated features, such as auto-looting (`F` key interaction).
+* Implement a method to send the keys without needing administration mode.
 
 > Contributions, bug reports, and feature requests are welcome via [GitHub](https://github.com/WilliamW1979).

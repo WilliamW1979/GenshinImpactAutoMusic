@@ -1,4 +1,4 @@
-# Genshin Impact Auto Music
+# Genshin Impact Repertoire of Myriad Melodies Auto Player
 
 [![Ko-Fi](https://img.shields.io/badge/Ko-Fi-F16061?style=flat-square&logo=ko-fi&logoColor=white)](https://ko-fi.com/williamw1979)
 [![GitHub Sponsors](https://img.shields.io/badge/GitHub_Sponsors-EA4AAA?style=flat-square&logo=github-sponsors&logoColor=white)](https://github.com/sponsors/WilliamW1979)

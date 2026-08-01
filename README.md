@@ -1,36 +1,58 @@
-[Ko-Fi](https://ko-fi.com/williamw1979) - Please help support my work.<br>
-[Github](https://github.com/WilliamW1979) - My current projects<br>
-[Github Sponsor](https://github.com/sponsors/WilliamW1979) - If you enjoy my programs and want to help, please sponsor me.<br>
 # Genshin Impact Auto Music
 
-## How to Use
+[![Ko-Fi](https://img.shields.io/badge/Ko-Fi-F16061?style=flat-square&logo=ko-fi&logoColor=white)](https://ko-fi.com/williamw1979)
+[![GitHub Sponsors](https://img.shields.io/badge/GitHub_Sponsors-EA4AAA?style=flat-square&logo=github-sponsors&logoColor=white)](https://github.com/sponsors/WilliamW1979)
+[![GitHub Projects](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/WilliamW1979)
 
-I wrote this program in 3 days because I was frustrated with another program that was written in Chinese that I couldn't read and get working, so I made my own version that worked ...
+An automated music performance tool for Genshin Impact, built as a reliable alternative to existing solutions.
 
-> You also need to set the game to 1920 x 1080 resolution. (If enough people really need it, I could add code for other resolutions later).
-> Run in Administrator Mode. There are two ways to do it, I suggest number 2.
->> 1. Right click the EXE and click on **Run in Administrator Mode** (This is a one time action, you have to do it each time you want to run the program).<br>
->> 2. Right click the EXE and click on **Properties** and the click on the **Compatibility** tab. You want to check the box that says **Run in Administrator Mode**.<br>
+---
 
+## Prerequisites
 
-### System Tray Icon
-> Right clicking allows you to access the menu to Activate / Deactivate it or close it out completely.
-> Left clicking will open the settings window
+* **Game Resolution:** Set Genshin Impact to **1920 x 1080** resolution.
+* **Administrator Privileges:** The application must run with administrator rights to interact with the game client.
 
-### Settings Window
-> Genshin Game: tells you if the game is in focus
-> Music Playing: Detects is you are in performing mode
-> Admin Mode: Tells you if this program is running in Administrator Mode
-> Auto Play Active: Tells you if you have the Auto Playing active (Activate/Deactivate from System Tray menu)
+### Setting Permanent Administrator Mode
 
-> Gold Tolerance / Blue Tolerance: These settings allow you to adjust the color matching tolerance. The system pulls the pixel colors in RGB and the tolerance allows you to be off on each color by this amount to make a match. The higher the number, the better it will hit buttons but the higher the risk of hitting other colors you don't want to to hit. Playing with these numbers, the defaults worked pretty well for me but I wanted people to have the option to adjust these numbers just in case their graphics were different.
-> Hit Offset: This adjust the detection zone for the buttons. A positive number moves it lower on the screen while a negative number moves it higher.
-> Timing Offset: This is the ms offset for pressing keys. If you find you are hitting a lot of Good instead of Perfects, adjusting this will help.
+1. Right-click the executable (`.exe`) and select **Properties**.
+2. Navigate to the **Compatibility** tab.
+3. Check the box labeled **Run this program as an administrator**.
+4. Click **Apply** and **OK**.
 
-## How it Works
-> The program will watch for specific points in the game to see if the music program is active. Once it detects the program is active and all conditions are met, it will start reading the notes as they drop. Once they past a specific point, they will detect the note and fire a Task that we call Fire and Forget. This task times the hits for when they hit the line. The reason for this is because animations on the line itself can interfere with the program. The program reads the colors on the screen so it isn't intrusive at all. Settings will help adjusting for individual cases, the defaults are what worked for me when I ran my tests.
+---
+
+## Usage Guide
+
+### System Tray Controls
+
+* **Left-Click:** Opens the settings window.
+* **Right-Click:** Opens the context menu to **Activate / Deactivate** auto-playing or close the application.
+
+### Settings Window Reference
+
+* **Genshin Game:** Indicates whether the game client is currently in focus.
+* **Music Playing:** Detects when the in-game performance mode is active.
+* **Admin Mode:** Verifies if the application is running with administrative privileges.
+* **Auto Play Active:** Displays the current activation status of the automation.
+
+### Configuration Parameters
+
+* **Gold / Blue Tolerance:** Adjusts the RGB color-matching threshold. Higher values increase button-hit consistency at the risk of matching unintended colors. Default values work for most standard configurations.
+* **Hit Offset:** Adjusts the vertical detection zone for buttons. Positive values shift the zone downward; negative values shift it upward.
+* **Timing Offset:** Adjusts keypress timing in milliseconds to help fine-tune "Good" hits into "Perfects."
+
+---
+
+## How It Works
+
+The program monitors specific screen regions to detect when the in-game music minigame is active. Once all conditions are met, it reads falling notes and utilizes non-intrusive screen color reading. Upon detecting a note past a specific threshold, it triggers an asynchronous "Fire and Forget" task that calculates the precise timing for the keypress, bypassing visual interference from line animations.
+
+---
 
 ## Future Plans
-> The blue buttons are not 100% hits. They work well enough to keep in the 90%+ range but it could use some fine tuning. I probably won't play with it for a while since being in the 90% is pretty decent already.
-> I also considered adding more features to this like auto looting (pressing F when the option appeared on the screen automatically).
-> If you have a suggestion, please feel free to suggest it through Github.
+
+* Refine blue note detection algorithms to improve hit rates beyond the current 90%+ baseline.
+* Implement automated features, such as auto-looting (`F` key interaction).
+
+> Contributions, bug reports, and feature requests are welcome via [GitHub](https://github.com/WilliamW1979).
